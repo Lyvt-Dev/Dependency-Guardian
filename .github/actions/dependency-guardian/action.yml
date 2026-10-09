@@ -1,0 +1,13 @@
+name: Dependency Guardian
+description: Scan a repository's npm lockfile for known vulnerabilities
+inputs:
+  path:
+    description: Directory containing package-lock.json
+    default: .
+    required: false
+runs:
+  using: composite
+  steps:
+    - shell: bash
+      run: |
+        node "${{ github.action_path }}/../../../dist/cli.js" scan "${{ inputs.path }}" --severity high
